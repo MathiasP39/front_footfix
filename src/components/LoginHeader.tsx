@@ -1,9 +1,10 @@
 interface HeaderInput {
     heading: string;
     paragraph:string;
+    setClick:any
 }
 
-export default function Header({heading,paragraph}:HeaderInput){
+export default function Header({heading,paragraph, setClick}:HeaderInput){
     return(
         <div className="">
             <div className="flex justify-center">
@@ -15,9 +16,11 @@ export default function Header({heading,paragraph}:HeaderInput){
             <h2 className=" text-center text-3xl font-extrabold text-gray-900">
                 {heading}
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600 mt-5">
-            {paragraph} {' '}
-            </p>
+            <a href="#" onClick={() => setClick(true)}>
+                <p className="text-center text-sm text-gray-600 mt-5">
+                {paragraph} {' '}
+                </p>
+            </a>
         </div>
     )
 }

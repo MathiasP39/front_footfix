@@ -1,6 +1,7 @@
-export interface ArticleItem {
-  id:number,
+export interface ArticleType {
+  id: number
   title:string,
+  description:string,
   content:string,
-  authorId:string
+  handler: ({ title, content }: { title: string; content: string }) => void;
 }
