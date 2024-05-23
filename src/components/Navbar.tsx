@@ -38,7 +38,6 @@ const Navbar = () => {
         <NavLink to = "/article" text = "Actualités"/>
         <NavLink to='/composition' text="Composition"/>
         <NavLink to = "#" text = "Draft"/>
-        <NavLink to = "#" text = "Contact"/>
       </ul>
     </div>
     </div>

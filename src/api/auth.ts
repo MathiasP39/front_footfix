@@ -53,7 +53,6 @@ export const getUserInfo = async () => {
 } 
 
 export const checkLogin = async () => {
-    console.log("passage dans check login")
     try {
         await API_service.get("/auth/check")
         return true

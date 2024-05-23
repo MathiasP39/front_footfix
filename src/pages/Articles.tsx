@@ -13,7 +13,6 @@ import parse from 'html-react-parser';
 const Article = () => {
     const [title,setTitle] = useState('')
     const [content, setContent] = useState('');
-    const [edit, setEditMode] = useState(false);
     const [mode, setMode] = useState("display all")
     const [page,setPage] = useState(1)
 
@@ -38,7 +37,7 @@ const Article = () => {
     
     useEffect( ()=> {
         RequeteArticles()
-    }, [edit, RequeteArticles])
+    }, [RequeteArticles, mode])
 
         
     const handleContentChange = (value: string) => {
@@ -50,11 +49,14 @@ const Article = () => {
         <div className='h-[66.7rem] pt-20 flex justify-center bg-gradient-to-r from-lime-900'>
         {mode == "display all" &&
         <div className='grid grid-cols-11 grid-rows-8'>
-            <button className='col-start-10 row-start-1 border-solid border-4 m-5 mt-8 mb-6 text-white border-red-600 bg-red-600 rounded-3xl' onClick={() => {setEditMode(true)}}>Creer un article</button>
+            <button className='col-start-10 row-start-1 border-solid border-4 m-5 mt-8 mb-6 text-white border-red-600 bg-red-600 rounded-3xl' onClick={() => {setMode("edition")}}>Creer un article</button>
             <ul className='h-[80%] gap-5 col-start-3 col-span-7 row-start-2 row-end-10 grid grid-cols-3 grid-rows-3'>
                 {ListArticles && Array.isArray(ListArticles) && ListArticles.map((article) => <ArticleItem article={article} handler={handleArticleOpening} />)}
             </ul>
-            <p className='col-start-6 row-start-8 col-span-2'>Pagination</p>
+            <div className='row-start-8 col-start-5 col-span-2 flex flex-row gap-5 justify-center'>
+            <button onClick={()=>{setPage(page-1)}} disabled={page<2}>Previous</button>
+            <button disabled={!(page<10)} onClick={()=>{setPage(page+1)}}>Next</button>
+            </div>
         </div>
         }
         { mode == "edition" &&
@@ -62,7 +64,7 @@ const Article = () => {
             <form onSubmit={handleSubmit(onArticleSubmit)}>
                 <div className='flex flex-col justify-center'>
                     <label htmlFor="title" className='m-auto'>Titre</label>
-                    <textarea {...register("title")} name="title" id="title" placeholder="Titre le de l'article" maxlength="50" rows="1" className='resize-none w-1/3 rounded-3xl m-auto p-1' />
+                    <textarea {...register("title")} name="title" id="title" placeholder="Titre le de l'article" maxLength={50} rows={1} className='resize-none w-1/3 rounded-3xl m-auto p-1' />
                 </div>
                 <div className='flex flex-col gap-3'>
                     <label htmlFor="description" className='m-auto'>Description</label>
@@ -75,9 +77,9 @@ const Article = () => {
                     <ReactQuill className='h-[93%]' theme="snow" value={content} onChange={handleContentChange} />
                 </div>
                 <div className='grid grid-cols-3 grid-rows-1'>
-                    <button  className = "col-start-1 row-start-1 border-red-600 border-solid border-4 ml-10 mr-10 mt-5 bg-red-600 rounded-3xl"onClick={() => {setEditMode(false)}}>Quit</button>
+                    <button  className = "col-start-1 row-start-1 border-red-600 border-solid border-4 ml-10 mr-10 mt-5 bg-red-600 rounded-3xl"onClick={() => {setMode("display all")}}>Quit</button>
                     <button className = "col-start-2 row-start-1  border-yellow-500 border-solid border-4 ml-10 mr-10 mt-5 bg-yellow-500 rounded-3xl">Save</button>
-                    <button  className = "col-start-3 row-start-1 border-red-600 border-solid border-4 ml-10 mr-10 mt-5 bg-red-600 rounded-3xl"onClick={(e) => {handlePublish}}>Publier</button>
+                    <button  className = "col-start-3 row-start-1 border-red-600 border-solid border-4 ml-10 mr-10 mt-5 bg-red-600 rounded-3xl" >Publier</button>
                 </div>
             </form>
         </div>}
