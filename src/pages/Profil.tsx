@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query"
 import { useContext, useEffect, useState } from "react"
 import { getUserInfo } from "../api/auth"
 import { getMyArticles } from "../api/article"
-import ArticleItem from "../components/ArticlePreview"
 import { AuthContext } from "../services/Auth"
 import { Navigate } from "react-router-dom"
 
