@@ -32,7 +32,7 @@ function Joueur ({id,parent,handle}:JoueurInput) {
     grid={[1, 1]}
     scale={1}
     bounds={bounds || undefined}
-    onStop={(e,data) => handle(id,data)}>
+    onStop={(_e,data) => handle(id,data)}>
     <div className='handle h-7 bg-black w-7 cursor-all-scroll rounded-full absolute left-0 top-0'/>
     </Draggable> 
 )
