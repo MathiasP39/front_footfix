@@ -1,7 +1,6 @@
 import { ArticleType } from "../types/Article"
-import { ClickArticleHandler } from "../types/onArticleClickHandlerType"
 
-function ArticleItem ({article,handler}: {article:ArticleType, handler:ClickArticleHandler} ) {
+function ArticleItem ({article,handler}: {article:ArticleType, handler:(article: ArticleType) => void} ) {
 
 
     return (

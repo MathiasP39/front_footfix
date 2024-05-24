@@ -51,7 +51,7 @@ const Article = () => {
         <div className='grid grid-cols-11 grid-rows-8'>
             <button className='col-start-10 row-start-1 border-solid border-4 m-5 mt-8 mb-6 text-white border-red-600 bg-red-600 rounded-3xl' onClick={() => {setMode("edition")}}>Creer un article</button>
             <ul className='h-[80%] gap-5 col-start-3 col-span-7 row-start-2 row-end-10 grid grid-cols-3 grid-rows-3'>
-                {ListArticles && Array.isArray(ListArticles) && ListArticles.map((article) => <ArticleItem article={article} handler={handleArticleOpening} />)}
+                {ListArticles && Array.isArray(ListArticles) && ListArticles.map((article) => <ArticleItem article={article} handler={handleArticleOpening} key={article.id} />)}
             </ul>
             <div className='row-start-8 col-start-5 col-span-2 flex flex-row gap-5 justify-center'>
             <button onClick={()=>{setPage(page-1)}} disabled={page<2}>Previous</button>

@@ -10,10 +10,14 @@ const Composition = () => {
             }
             {
                 !editMode && <>
-                <div className="col-span-full">
-                Bienvenu sur l'outil de composition
+                <p>Bienvenu sur l'outil de composition</p>
                 <button className="col-span-full" onClick={() => setEditMode(true)}>Creer ma composition</button>
-            </div></>
+                <div>
+                    <p>
+                        Bienvenu sur l'outil de composition, laissez libre court a votre imagination pour vos mises en places tactiques ou créer
+                        votre équipe de reve
+                    </p>
+                </div></>
             }
         </div>
     )

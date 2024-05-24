@@ -8,6 +8,6 @@ export const SaveComp = async (data:Composition) => {
 }
 
 export const MyComps = async () => {
-    const request = await API_service.get("/composition/getMyComps")
-    return request
+    const request = await API_service.get("/composition/myComps")
+    return request.data
 }

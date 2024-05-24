@@ -7,6 +7,7 @@ import { LoginInput } from "../types/LoginInput.ts"
 import { Navigate } from "react-router-dom"
 import { AuthContext } from "../services/Auth.tsx"
 import { useContext, useState } from "react"
+import Fond from "../assets/3152174.jpg"
 
 const fixedInputClass="rounded-md appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
 
@@ -48,7 +49,7 @@ function Login() {
   }
 
   return (
-    <div className="min-h-full h-screen flex items-center justify-center py-15 px-4 sm:px-6 lg:px-8 bg-[url('src/assets/3152174.jpg')] bg-cover">
+    <div className={`min-h-full h-screen flex items-center justify-center py-15 px-4 sm:px-6 lg:px-8 bg-cover`} style={{ backgroundImage: `url(${Fond})` }}>
       {!registerMode &&  <div className="flex flex-col justify-center items-center border-4 border-[#4F7A43] rounded-lg bg-[#4F7A43] w-[32rem] h-[42rem]">
         <LoginHeader heading="Login to your account" paragraph="Don't have an account yet ?" setClick={setRegister}/>
         <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 mt-8 space-y-6 mb-[10px]">

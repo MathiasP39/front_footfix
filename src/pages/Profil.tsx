@@ -1,9 +1,12 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, } from "@tanstack/react-query"
 import { useContext, useEffect, useState } from "react"
 import { getUserInfo } from "../api/auth"
-import { getMyArticles } from "../api/article"
+import { deleteArticle, getMyArticles } from "../api/article"
 import { AuthContext } from "../services/Auth"
 import { Navigate } from "react-router-dom"
+import { MyComps } from "../api/composition"
+import MyArticlePreview from "../components/Profil/Article_Display"
+import { ArticleFields } from "../types/ArticleFields"
 
 type UserInfo = {
     fullname:string
@@ -11,11 +14,9 @@ type UserInfo = {
     role:string
 }
 
-type ArticleInfo = {
-    id: number,
-    title: string,
-    description: string,
-    content: string,
+type CompositionInfo = {
+    id: number
+    nom: string
 }
 
 function Profil () {
@@ -35,30 +36,52 @@ function Profil () {
         }
       }, [authContext.user_status.isLogin]);
 
-    const {data:info} = useQuery<UserInfo>({
+    const {data:info, refetch:inforefetch} = useQuery<UserInfo>({
         queryFn: async () => await getUserInfo(),
         queryKey: ["userInfo"],
         })
     
-    const {data:myarticles} = useQuery<ArticleInfo[]> ({
+    const {data:myarticles,refetch:articlequeryrefetch} = useQuery<ArticleFields[]> ({
         queryFn: async () => await getMyArticles(),
         queryKey: ["myarticlesInfo"]
     })
 
+    const {data:mycomposition, refetch:mycomporefetch} = useQuery<CompositionInfo[]> ( {
+       queryFn: async () => await MyComps(),
+       queryKey: ["mycomps"]
+    })
+
+    const ArticleSupp = useMutation ({
+        mutationFn: deleteArticle,
+        onSuccess: () => { articlequeryrefetch()}
+      })
+
+    useEffect(() => {
+        articlequeryrefetch()
+        inforefetch()
+        mycomporefetch()
+    },[section,articlequeryrefetch,inforefetch,mycomporefetch])
+
+    function handleArticleSupp(id:number) {
+        ArticleSupp.mutate(id)
+    }
+
     return (
-        <div className="pt-20">
+        <div className="pt-20 flex flex-col items-center">
+            <div>
             <a href='#'onClick={() => setSection("info")}> Mes Infos </a>
             <a href='#' onClick={() => setSection("articles")}> Mes articles </a>
             <a href='#' onClick={() => setSection("compos")}> Mes compos </a>
-            <div>
-                {section == "info" && <><p>Section info</p><p>fullName : {info?.fullname}</p><p>Email : {info?.email}</p><p>Role: {info?.role}</p></>}
-                {section == "articles" && <><p>Section article</p>
-                <div>{myarticles && myarticles.map((article) => {return article.title})}
-                </div>
-                </>}
-                {section == "compos" && <><p>Section compo</p></>}
             </div>
-            {delayNavigate ? <Navigate to="/" replace={true} /> : <div>Your Protected Component</div>}
+            <div className="flex justify-center flex-col">
+                {section == "info" && <><p>Section info</p><p>fullName : {info?.fullname}</p><p>Email : {info?.email}</p><p>Role: {info?.role}</p><button>Supprimer mon compte</button> </>}
+                {section == "articles" && <div><p>Vos articles</p>
+                <div>{myarticles && myarticles.map((article) => {return <MyArticlePreview id={article.id} title={article.title} content={article.content} description={article.description} handleSupp={handleArticleSupp} key={article.id}/>})}
+                </div>
+                </div>}
+                {section == "compos" && <><div>{mycomposition && mycomposition.map((compo) => {return compo.nom})}</div></>}
+            </div>
+            {delayNavigate && <Navigate to="/" replace={true} /> }
         </div>
     )
 }

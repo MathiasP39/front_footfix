@@ -19,3 +19,8 @@ export const getMyArticles = async () => {
     const request = await API_service.get("article/getMyArticles")
     return request.data
 }
+
+export const deleteArticle = async (id:number) => {
+    const request = await API_service.delete("article/suppress",{data: {id:id}})
+    return request.status
+}
