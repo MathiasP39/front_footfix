@@ -4,7 +4,7 @@ import Terrain from "../components/terrain_foot"
 const Composition = () => {
     const [editMode, setEditMode] = useState(false)
     return (
-        <div className="w-full mt-20 grid grid-cols-6 grid-rows-5 max-h-full">
+        <div className="w-full mt-20 grid grid-cols-6 grid-rows-5 h-full">
             {
                 editMode && <><button onClick={() => setEditMode(false)}>Retour edition</button><Terrain/></>
             }

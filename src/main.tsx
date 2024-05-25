@@ -32,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path:"/composition",
-    element:<div className='h-1000'><Navbar/><Composition/></div>,
+    element:<div className='h-full'><Navbar/><Composition/></div>,
   },
   {
     path: '/profil',

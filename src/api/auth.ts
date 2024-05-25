@@ -60,3 +60,8 @@ export const checkLogin = async () => {
         return false
     }
 }
+
+export const deleteUser = async () => {
+    const request = await API_service.delete("/auth/suppress")
+    return request.status
+}

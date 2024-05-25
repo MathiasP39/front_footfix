@@ -11,3 +11,8 @@ export const MyComps = async () => {
     const request = await API_service.get("/composition/myComps")
     return request.data
 }
+
+export const deleteCompo = async (id:number) => {
+    const request = await API_service.delete("composition/delete",{data: {id:id}})
+    return request.status
+}

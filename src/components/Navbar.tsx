@@ -37,7 +37,6 @@ const Navbar = () => {
         <Home/>
         <NavLink to = "/article" text = "Actualités"/>
         <NavLink to='/composition' text="Composition"/>
-        <NavLink to = "#" text = "Draft"/>
       </ul>
     </div>
     </div>

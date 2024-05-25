@@ -68,14 +68,14 @@ const Terrain = () => {
     
     return (
 <div className="col-span-6 row-span-5 border-solid border-black border-8 grid grid-rows-[auto,1fr,auto] p-4 relative" ref={terrainRef}>
-  <label htmlFor="textareaTitle" className='mx-auto p-1 md:w-1/3 mb-4 text-center'>Le nom de ta composition</label>
+  <label htmlFor="textareaTitle" className='mx-auto p-5 md:w-1/3 mb-4 text-center'>Le nom de ta composition</label>
   <textarea
     name=""
     id="textareaTitle"
     value={title}
     onChange={handleTitleChange}
     rows={1}
-    className="resize-none w-full md:w-1/3 rounded-3xl mx-auto p-1 border-red-950 border-solid border-4 mb-4 text-center"/>
+    className="resize-none w-full md:w-1/3 rounded-3xl mx-auto p-1 border-red-950 border-solid border-4 mb-4 mt-5 max-h-36 text-center"/>
   <div className="flex justify-center items-center mb-4">
     {joueurs.map((joueur, index) => (
                 <div key={index}>{joueur.player}</div>
@@ -84,7 +84,7 @@ const Terrain = () => {
       id="Div_Edition"
       src={TerrainImage}
       alt="image terrain de foot"
-      className="max-w-full max-h-full"/></div>
+      className="max-w-full max-h-full flex-shrink-1 "/></div>
   <div className="flex justify-around">
     <button
       className="border-solid border-4 border-blue-500 p-2"
