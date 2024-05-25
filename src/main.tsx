@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Article from './pages/Articles.tsx'
 import Composition from './pages/Composition.tsx'
 import Profil from './pages/Profil.tsx'
+import SocketNotifier from './components/SocketNotifier.tsx'
 
 
 const queryClient = new QueryClient()
@@ -44,6 +45,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
     <AuthContextProvider>
+      <SocketNotifier/>
       <RouterProvider router = {router}/>
       </AuthContextProvider>
     </QueryClientProvider>

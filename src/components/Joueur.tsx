@@ -1,18 +1,13 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import Draggable, { DraggableData } from 'react-draggable';
-
-interface JoueurInput {
-    parent: React.RefObject<HTMLDivElement>
-    id: number
-    handle: (id: number, data: DraggableData) => void;
-}
+import { JoueurType } from '../types/Joueur';
 
 type Position = {
   x: number
   y: number
 }
 
-function Joueur ({id,parent,handle}:JoueurInput) {
+function Joueur ({id,parent,handle}:JoueurType & {handle: (id: number, data: DraggableData) => void;}) {
 
   const [bounds, setBounds] = useState<{ left: number; top: number; right: number; bottom: number } | null>(null);
   const [nom,setNom] = useState("Joueur"+id)

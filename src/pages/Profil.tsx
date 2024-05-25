@@ -8,6 +8,7 @@ import { MyComps, deleteCompo } from "../api/composition"
 import MyArticlePreview from "../components/Profil/Article_Display"
 import { ArticleFields } from "../types/ArticleFields"
 import CompositionPreview from "../components/Profil/Composition_display"
+import Terrain from "../components/terrain_foot"
 
 type UserInfo = {
     fullname:string
@@ -87,6 +88,11 @@ function Profil () {
     function handleAccountSupp() {
         AccountSupp.mutate()
     }
+
+    function openCompo(id:number) {
+        console.log(id)
+        setSection("compoedit")
+    }
     return (
         <div className="pt-20 flex flex-col items-center">
             <div>
@@ -102,7 +108,8 @@ function Profil () {
                 </div>}
                 {section == "compos" && <>
                 <p>Vos compos</p>
-                <div>{mycomposition && mycomposition.map((compo) => <CompositionPreview id={compo.id} name={compo.nom} suppression={handleCompoSupp} key={compo.id}/>)}</div></>}
+                <div>{mycomposition && mycomposition.map((compo) => <CompositionPreview id={compo.id} name={compo.nom} suppression={handleCompoSupp} open={openCompo}key={compo.id}/>)}</div></>}
+                {section == "compoedit" && <><Terrain/></>}
             </div>
             {delayNavigate && <Navigate to="/" replace={true} /> }
         </div>
