@@ -12,6 +12,8 @@ type JoueurType = {
     player : JSX.Element
 }
 
+
+
 const Terrain = () => {
 
     const authContext = useContext(AuthContext)
@@ -65,15 +67,38 @@ const Terrain = () => {
     
     
     return (
-        <div className="col-start-2 col-end-6 row-start-2 row-end-7 border-solid border-black border-8 grid grid-cols-10 grid-rows-10 relative" ref={terrainRef}>
-          <textarea name="" id="textareaTitle" value={title} onChange={handleTitleChange} rows={1} className='resize-none w-1/3 rounded-3xl m-auto p-1 border-red-950 border-solid'/>
-            {joueurs.map((joueur, index) => (
+<div className="col-span-6 row-span-5 border-solid border-black border-8 grid grid-rows-[auto,1fr,auto] p-4 relative" ref={terrainRef}>
+  <label htmlFor="textareaTitle" className='mx-auto p-1 md:w-1/3 mb-4 text-center'>Le nom de ta composition</label>
+  <textarea
+    name=""
+    id="textareaTitle"
+    value={title}
+    onChange={handleTitleChange}
+    rows={1}
+    className="resize-none w-full md:w-1/3 rounded-3xl mx-auto p-1 border-red-950 border-solid border-4 mb-4 text-center"/>
+  <div className="flex justify-center items-center mb-4">
+    {joueurs.map((joueur, index) => (
                 <div key={index}>{joueur.player}</div>
             ))}
-            <img id="Div_Edition" src={TerrainImage} alt="image terrain de foot" className="col-start-3 row-start-2 col-end-9 h-auto w-auto"/>
-            <button className="border-solid border-4 border-blue-500 row-start-10 col-start-3" onClick={addComponent}>Créé un Joueur</button>
-            <button className="row-start-10 col-start-8 border-solid border-4 border-blue-500" onClick={handleSubmit} disabled={!authContext.user_status.isLogin || title == ''}>Sauvegarder</button>
-        </div>
+    <img
+      id="Div_Edition"
+      src={TerrainImage}
+      alt="image terrain de foot"
+      className="max-w-full max-h-full"/></div>
+  <div className="flex justify-around">
+    <button
+      className="border-solid border-4 border-blue-500 p-2"
+      onClick={addComponent}>Créer un Joueur </button>
+    <button
+      className="border-solid border-4 border-blue-500 p-2"
+      onClick={handleSubmit}
+      disabled={!authContext.user_status.isLogin || title === ''}
+    >
+      Sauvegarder
+    </button>
+  </div>
+</div>
+
         
     )
 
